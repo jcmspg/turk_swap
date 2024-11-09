@@ -133,15 +133,6 @@ t_node *find_cheapest(t_stack *stack)
         }
         current = current->next;
     }
-    if (cheapest == NULL)
-        return (NULL);
-
-    if (cheapest->target == NULL)
-        return (NULL);
-
-    if (cheapest)
-        cheapest->cheapest = true;
-
     return (cheapest);
 }
 

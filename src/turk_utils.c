@@ -24,25 +24,41 @@ void locking_targets_a(t_stack **a, t_stack **b)
     max = NULL;
     while (current_a)
     {
+    //    printf("Processing Current A: %d\n", current_a->value);
         best_match = INT_MIN;
         current_b = (*b)->head;
         target = NULL;
+
         while (current_b)
         {
-            if (current_b->value > best_match && !current_b->target)
+      //      printf("Comparing with Current B: %d\n", current_b->value);
+
+            if (current_b->value < current_a->value && current_b->value > best_match)
             {
                 best_match = current_b->value;
                 target = current_b;
+        //        printf("Best match: %d\n", target->value);
             }
             current_b = current_b->next;
         }
-        if (target == NULL)
+        if (best_match == INT_MIN)
         {
             max = find_max_node(*b);
+          //  if (max)
+          //      printf("Max value: %d\n", max->value);
+       //     else
+           //     printf("Max is NULL\n");
             current_a->target = max;
         }
         else
+        {
             current_a->target = target;
+        //    if (target)
+          //      printf("Target value: %d\n", target->value);
+          //  else
+            //    printf("Target is NULL\n");
+        }
+
         current_a = current_a->next;
     }
 }
@@ -54,24 +70,24 @@ void locking_targets_b(t_stack **a, t_stack **b)
     t_node *target;
     t_node *min;
     int best_match;
-    
+
     current_b = (*b)->head;
     min = NULL;
-    while (current_b)
+    while(current_b)
     {
         best_match = INT_MAX;
         current_a = (*a)->head;
         target = NULL;
         while (current_a)
         {
-            if (current_a->value < best_match && !current_a->target)
+            if (current_a->value > current_b->value && current_a->value < best_match)
             {
                 best_match = current_a->value;
                 target = current_a;
             }
             current_a = current_a->next;
         }
-        if (target == NULL)
+        if (best_match == INT_MAX)
         {
             min = find_min_node(*a);
             current_b->target = min;
@@ -86,11 +102,7 @@ void locking_targets_b(t_stack **a, t_stack **b)
 void set_cheapest(t_stack **a)
 {
     if (a == NULL || (*a)->head == NULL)
-    {
-        printf("Error\n");
-        printf("Stack is NULL\n");
         return ;
-    }
 
     t_node *cheapest;
     t_node *current_a;
@@ -105,7 +117,7 @@ void set_cheapest(t_stack **a)
 
     while (current_a)
     {
-        if (current_a->push_cost <= lowest_cost)
+        if (current_a->push_cost < lowest_cost)
         {
             lowest_cost = current_a->push_cost;
             cheapest = current_a;
@@ -113,32 +125,21 @@ void set_cheapest(t_stack **a)
         current_a = current_a->next;
     }
     if (cheapest != NULL)
-    {
         cheapest->cheapest = true;
-        printf("Cheapest: %d with cost %d\n", cheapest->value, cheapest->push_cost);
-    }
 }
 
 void process_nodes_a(t_stack **a, t_stack **b)
 {
-    printf("Processing nodes A\n");
-    assign_index(*a);
-    printf("Assigned indexes to A\n");
-    assign_index(*b);
-    printf("Assigned indexes to B\n");
+    assign_index(a);
+    assign_index(b);
     locking_targets_a(a, b);
-    calculate_total_cost_a(a, b);
+    calculate_cost_a(a, b);
     set_cheapest(a);
 }
 
 void process_nodes_b(t_stack **a, t_stack **b)
 {
-    printf("Processing nodes B\n");
-    assign_index(*a);
-    printf("Assigned indexes to B\n");
-    assign_index(*b);
-    printf("Assigned indexes to A\n");
+    assign_index(a);
+    assign_index(b);
     locking_targets_b(a, b);
-    calculate_total_cost_b(a, b);
-    set_cheapest(b);
 }

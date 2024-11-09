@@ -64,14 +64,11 @@ void rotate(t_stack **stack)
 {
 	t_node *temp;
 
-	if ((*stack)->size < 2 || !(*stack)->head->next || !(*stack)->head)
-		return;
-    if ((*stack)->head == NULL)
-        return;
-    if ((!*stack))
+    if (!(*stack) || !stack || (*stack)->size < 2)
         return;
     
     temp = (*stack)->head;
+
     (*stack)->head = (*stack)->head->next;
     (*stack)->tail->next = temp;
     (*stack)->tail = temp;
@@ -84,11 +81,12 @@ void reverse_rotate(t_stack **stack)
 	t_node *temp;
     
     if (!(*stack) || !stack || (*stack)->size < 2)
-        return;
-    
+        return;    
+
     temp = (*stack)->head;
     while (temp->next->next)
         temp = temp->next;
+
     (*stack)->tail->next = (*stack)->head;
     (*stack)->head = (*stack)->tail;
     (*stack)->tail = temp;

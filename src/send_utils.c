@@ -16,22 +16,25 @@ void double_rotate_top(t_stack **a, t_stack **b, t_node *cheapest)
 {
     while ((*a)->head != cheapest && (*b)->head != cheapest->target)
         rotate_ab(a, b);
-//    assign_index(*a);
-//    assign_index(*b);
+    assign_index(a);
+    assign_index(b);
 }
 
 void double_rev_rotate_top(t_stack **a, t_stack **b, t_node *cheapest)
 {
     while ((*a)->head != cheapest && (*b)->head != cheapest->target)
         reverse_ro_ab(a, b);
-//    assign_index(*a);
-//    assign_index(*b);
+    assign_index(a);
+    assign_index(b);
 }
 
 void get_a_ready(t_stack **a, t_node *top)
 {
-    while ((*a)->head != top)
+    int counter = 0;
+
+    while ((*a)->head != top && counter++ < 20)
     {
+    //    printf("Top: %d\n", top->value);
         if (top->above_med)
             rotate_a(a);
         else

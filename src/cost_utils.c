@@ -12,86 +12,26 @@
 
 #include "push_swap.h"
 
-static int	calculate_push_cost_a(t_stack **a, t_node *node)
+void    calculate_cost_a(t_stack **a, t_stack **b)
 {
-	int		cost;
-	t_node	*current;
+    t_node *current_a;
+    int size_a;
+    int size_b;
 
-	if (!a || !(*a) || !(*a)->head || !node)
-		return (INT_MAX);
-	cost = 0;
-	current = (*a)->head;
-	while (current)
-	{
-		if (current->index == node->index)
-			break ;
-		current = current->next;
-		cost++;
-	}
-	if (current == NULL)
-		return (INT_MAX);
-	return (cost);
-}
-
-static int calculate_push_cost_b(t_stack **b, t_node *node)
-{
-    int		cost;
-    t_node	*current;
-
-    if (!b || !(*b) || !(*b)->head || !node)
-        return (INT_MAX);
-    cost = 0;
-    current = (*b)->head;
-    while (current)
+    size_a = (*a)->size;
+    size_b = (*b)->size;
+    current_a = (*a)->head;
+    while (current_a)
     {
-        if (current->index == node->index)
-            break ;
-        current = current->next;
-        cost++;
-    }
-    if (current == NULL)
-        return (INT_MAX);
-    return (cost);
-}
-
-
-
-// ammount of operations to push node to top of a and its target to top of b
-void	calculate_total_cost_a(t_stack **a, t_stack **b)
-{
-	t_node	*current_a;
-
-
-	if (!a || !(*a) || !(*a)->head || !b || !(*b) || !(*b)->head)
-		return ;
-	current_a = (*a)->head;
-
-	while (current_a)
-	{
-		current_a->push_cost = calculate_push_cost_a(a, current_a);
-		if (current_a->target)
-			current_a->push_cost += calculate_push_cost_b(b, current_a->target);
-		else
-			current_a->push_cost = INT_MAX;
-		current_a = current_a->next;
-	}
-}
-
-void calculate_total_cost_b(t_stack **a, t_stack **b)
-{
-    t_node	*current_b;
-
-    if (!a || !(*a) || !(*a)->head || !b || !(*b) || !(*b)->head)
-        return ;
-    current_b = (*b)->head;
-
-    while (current_b)
-    {
-        current_b->push_cost = calculate_push_cost_b(b, current_b);
-        if (current_b->target)
-            current_b->push_cost += calculate_push_cost_a(a, current_b->target);
-        else
-            current_b->push_cost = INT_MAX;
-        current_b = current_b->next;
+        current_a->push_cost = (current_a->index);
+        if (current_a->target)
+        {
+            if (!current_a->above_med)
+                current_a->push_cost = size_a - (current_a->index);
+            if (current_a->target->above_med)
+                current_a->push_cost += (current_a->target->index);
+            else
+                current_a->push_cost += size_b - (current_a->target->index);}
+        current_a = current_a->next;
     }
 }

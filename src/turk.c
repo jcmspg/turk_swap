@@ -12,12 +12,12 @@
 
 #include "push_swap.h"
 
-static void	debug_stacks(t_stack *a, t_stack *b)
-{
-	print_stack(a, 'A');
-	print_stack(b, 'B');
-	printf("------\n");
-}
+//static void	debug_stacks(t_stack *a, t_stack *b)
+//{
+//    print_stack(a, 'A');
+//    print_stack(b, 'B');
+//    printf("------\n");
+//}
 
 
 
@@ -25,29 +25,34 @@ static void	debug_stacks(t_stack *a, t_stack *b)
 
 void	ft_turk(t_stack **a, t_stack **b)
 {
-	if ((*a)->size > 3)
-	{
-		push_b(a, b);
-		push_b(a, b);
-	}
-	// repeat process until stack A is empty
-	while ((*a)->size > 3)
-	{
-        printf("calling process_nodes_a\n");
-		process_nodes_a(a, b);
-		send_to_b(a, b);
-	}
+    int size;
 
-	sort_3(a);
+    size = (*a)->size;
+
+    if (size-- > 3 && !is_sorted(*a))
+        push_b(a, b);
+    if (size-- > 3 && !is_sorted(*a))
+        push_b(a, b);
+
+    while ((*a)->size > 3 && !is_sorted(*a))
+    {
+        process_nodes_a(a, b);
+        send_to_b(a, b);
+    }
+
+    sort_3(a);
    	
     while ((*b)->size > 0)
 	{
-        printf("calling process_nodes_b\n");
 		process_nodes_b(a, b);
 		send_to_a(a, b);
 	}
-
-	assign_index(*a);
+    
+//    print_stack_values(*a);
+//    print_stack_values(*b);
+//
+//    debug_stacks(*a, *b);
+    assign_index(a);
 	move_min_to_top(a);
-    debug_stacks(*a, *b);
+//    debug_stacks(*a, *b);
 }

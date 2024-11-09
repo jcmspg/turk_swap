@@ -26,6 +26,7 @@
 # include <stdarg.h>
 # include <math.h>
 # include "../inc/lib_ft/libft.h"
+//# include "../inc/ft_printf/ft_printf.h"
 
 # define HASH_SIZE 1000
 
@@ -148,7 +149,7 @@ void ft_small_sort(t_stack **a, t_stack **b);
 int ft_parser(t_stack *stack_a, int argc, char **argv);
 
 // index functions
-void assign_index(t_stack *stack);
+void assign_index(t_stack **stack);
 
 // sort B functions
 void ft_turk(t_stack **a, t_stack **b);
@@ -163,8 +164,8 @@ void prepare_b(t_stack **b, t_node *node);
 
 // cost functions
 int calculate_push_cost(t_stack **a, t_node *node);
-void calculate_total_cost_a(t_stack **a, t_stack **b);
-void calculate_total_cost_b(t_stack **a, t_stack **b);
+void calculate_cost_a(t_stack **a, t_stack **b);
+void calculate_cost_b(t_stack **a, t_stack **b);
 t_node *find_optimal_node(t_stack **a, t_stack **b);
 
 // send functions
@@ -182,6 +183,7 @@ void print_stack(t_stack *stack, char stack_name);
 void print_array(int *array, int size, char *message);
 void print_partition(t_stack *stack);
 void print_index(t_stack *stack);
+void print_stack_values(t_stack *stack);
 
 
 #endif
