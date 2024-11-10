@@ -64,9 +64,6 @@ To filter the output for specific debugging information, use `grep`:
 ```
 
 ## Algorithm Description
-Sure! Here's a more detailed explanation of how the Push Swap algorithm works:
-
-## Algorithm Description
 
 The Push Swap algorithm works by using two stacks, `A` and `B`, and a set of operations to sort the elements in stack `A`. The main steps of the algorithm are as follows:
 
