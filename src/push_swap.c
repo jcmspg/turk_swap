@@ -46,11 +46,14 @@ int	main(int argc, char **argv)
 //    print_stack(stack_b, 'B');
 
 
-//    printf("stack A values\n");
-//    print_stack_values(stack_a);
-//
-//    printf("stack B values\n");
-//    print_stack_values(stack_b);
+    printf("stack A values\n");
+    print_stack_values(stack_a);
+
+    printf("stack B values\n");
+    print_stack_values(stack_b);
+
+
+	printf("is it sorted? %d\n", is_sorted(stack_a));
 
 	free_stack(&stack_a);
 	free_stack(&stack_b);

@@ -12,36 +12,14 @@
 
 #include "push_swap.h"
 
-// Function to assign index to each node in the stack
-/*
-void	assign_index(t_stack **stack)
-{
-	t_node	*current;
-	int		index;
-	int		median;
-    
-    current = (*stack)->head;
-    index = 0;
-    
-    if (!stack)
-        return ;
-
-    median = (*stack)->size / 2;
-    while (current != NULL)
-    {
-        current->index = index;
-        current->above_med = (index >= median);
-        printf("Value: %d, Index: %d, Above Median: %d\n", current->value, current->index, current->above_med);
-        ++index;
-        current = current->next;
-    }
-}
-*/
 void assign_index (t_stack **stack)
 {
     int i;
     int median;
     t_node *current;
+
+    if (!*stack)
+        return ;
 
     i = 0;
     median = (*stack)->size / 2;
@@ -50,7 +28,7 @@ void assign_index (t_stack **stack)
     while (current != NULL)
     {
         current->index = i;
-        if (i >= median)
+        if (i <= median)
             current->above_med = true;
         else
             current->above_med = false;

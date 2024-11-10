@@ -34,11 +34,15 @@ void	ft_turk(t_stack **a, t_stack **b)
     if (size-- > 3 && !is_sorted(*a))
         push_b(a, b);
 
+    print_stack_values(*a);
+
     while ((*a)->size > 3 && !is_sorted(*a))
     {
         process_nodes_a(a, b);
         send_to_b(a, b);
     }
+
+    print_stack_values(*a);
 
     sort_3(a);
    	
