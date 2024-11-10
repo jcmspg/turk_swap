@@ -14,7 +14,6 @@
 
 // functions to check if values are valid
 
-// checks if the value is a number
 int	is_number(char *str)
 {
     int	i;
@@ -31,13 +30,6 @@ int	is_number(char *str)
     return (1);
 }
 
-// checks if the value is an integer
-// if it is, it returns 1
-// if it is not, it returns 0
-// it also checks if the value is within the integer limits
-// it can accept values with multiple 0s before the number,
-// it cannot accept values with multiple - before the number
-// it also checls the length of the number, excluding the - sign and the 0s
 int	is_integer(char *str)
 {
     long 	nbr;
@@ -58,9 +50,6 @@ int	is_integer(char *str)
     return (1);
 }
 
-// function to check if the values are valid
-// if they are, it returns 1
-// if they are not, it returns 0
 int check_values(char **values)
 {
     int	i;
@@ -78,9 +67,6 @@ int check_values(char **values)
     return (1);
 }
 
-// checks if all the values of the stack are sorted
-// if they are, it returns 1
-// if they are not, it returns 0
 int	is_sorted(t_stack *stack)
 {
     t_node  *current;

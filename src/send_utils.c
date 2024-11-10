@@ -30,11 +30,8 @@ void double_rev_rotate_top(t_stack **a, t_stack **b, t_node *cheapest)
 
 void get_a_ready(t_stack **a, t_node *top)
 {
-    int counter = 0;
-
-    while ((*a)->head != top && counter++ < 20)
+    while ((*a)->head != top)
     {
-    //    printf("Top: %d\n", top->value);
         if (top->above_med)
             rotate_a(a);
         else

@@ -23,15 +23,13 @@ void    calculate_cost_a(t_stack **a, t_stack **b)
     current_a = (*a)->head;
     while (current_a)
     {
-        current_a->push_cost = (current_a->index);
-        if (current_a->target)
-        {
-            if (!current_a->above_med)
-                current_a->push_cost = size_a - (current_a->index);
-            if (current_a->target->above_med)
-                current_a->push_cost += (current_a->target->index);
-            else
-                current_a->push_cost += size_b - (current_a->target->index);}
+        current_a->push_cost = current_a->index;
+        if (!current_a->above_med)
+            current_a->push_cost = size_a - (current_a->index);
+        if (current_a->target->above_med)
+            current_a->push_cost += (current_a->target->index);
+        else
+            current_a->push_cost += size_b - (current_a->target->index);
         current_a = current_a->next;
     }
 }

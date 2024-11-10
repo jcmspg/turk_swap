@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-void print_stack_values(t_stack *stack)
+/* void print_stack_values(t_stack *stack)
 {
     t_node *current = stack->head;
     printf("Stack values: ");
@@ -22,7 +22,8 @@ void print_stack_values(t_stack *stack)
         current = current->next;
     }
     printf("\n");
-}
+ }
+ */
 
 int	main(int argc, char **argv)
 {
@@ -41,20 +42,6 @@ int	main(int argc, char **argv)
 		ft_small_sort(&stack_a, &stack_b);
 	else
 		ft_turk(&stack_a, &stack_b);
-
-//    print_stack(stack_a, 'A');
-//    print_stack(stack_b, 'B');
-
-
-    printf("stack A values\n");
-    print_stack_values(stack_a);
-
-    printf("stack B values\n");
-    print_stack_values(stack_b);
-
-
-	printf("is it sorted? %d\n", is_sorted(stack_a));
-
 	free_stack(&stack_a);
 	free_stack(&stack_b);
 	return (0);

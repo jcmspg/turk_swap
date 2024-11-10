@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   small_sort.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joamiran <joamiran@student.42lisboa.com>   +#+  +:+       +#+        */
+/*   By: joamiran <joamiran@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 18:48:41 by joamiran          #+#    #+#             */
-/*   Updated: 2024/11/09 01:41:23 by joamiran         ###   ########.fr       */
+/*   Updated: 2024/11/10 19:00:50 by joamiran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,20 @@ void	sort_2(t_stack **a)
 }
 
 // sort 3 numbers
-void	sort_3(t_stack **a)
+void sort_3(t_stack **a)
 {
     int first;
     int second;
     int third;
 
     if (is_sorted(*a))
-        return ;
-
+        return;
     first = (*a)->head->value;
     second = (*a)->head->next->value;
     third = (*a)->head->next->next->value;
     if (first > second && first > third)
     {
-        if(second > third)
+        if (second > third)
         {
             swap_a(a);
             reverse_rotate_a(a);
@@ -44,7 +43,7 @@ void	sort_3(t_stack **a)
     }
     else if (second > first && second > third)
     {
-        if(first > third)
+        if (first > third)
             reverse_rotate_a(a);
         else
         {
@@ -54,7 +53,7 @@ void	sort_3(t_stack **a)
     }
     else if (third > first && third > second)
     {
-        if(first > second)
+        if (first > second)
             swap_a(a);
     }
 }
@@ -65,16 +64,10 @@ void sort_4(t_stack **a, t_stack **b)
     int min;
 
     min = find_min(*a);
-
-    // Push the minimum to stack B
     while ((*a)->head->value != min)
-        rotate_a(a); // Rotate until min is at the top
-    push_b(a, b); // Push the minimum to B
-
-    // Now sort the remaining 3 numbers in stack A
+        rotate_a(a);
+    push_b(a, b);
     sort_3(a);
-
-    // Push the minimum back to stack A
     push_a(a, b);
 }
 
@@ -86,7 +79,6 @@ void sort_5(t_stack **a, t_stack **b)
 
     min = find_min(*a);
     second_min = find_second_min(*a);
-
     while ((*a)->size > 3)
     {
         if ((*a)->head->value == min || (*a)->head->value == second_min)

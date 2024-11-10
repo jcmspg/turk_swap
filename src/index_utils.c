@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   index_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joamiran <joamiran@student.42lisboa.com>   +#+  +:+       +#+        */
+/*   By: joamiran <joamiran@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 17:52:01 by joamiran          #+#    #+#             */
-/*   Updated: 2024/11/09 01:17:34 by joamiran         ###   ########.fr       */
+/*   Updated: 2024/11/10 18:58:55 by joamiran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,10 @@ void assign_index (t_stack **stack)
             current->above_med = true;
         else
             current->above_med = false;
-        i++;
+        ++i;
         current = current->next;
     }
 }
-
-
-
 
 // function to print all the nodes and their indexes
 void	print_index(t_stack *stack)

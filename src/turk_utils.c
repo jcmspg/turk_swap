@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   turk_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joamiran <joamiran@student.42lisboa.com>   +#+  +:+       +#+        */
+/*   By: joamiran <joamiran@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 22:31:04 by joamiran          #+#    #+#             */
-/*   Updated: 2024/11/09 02:10:05 by joamiran         ###   ########.fr       */
+/*   Updated: 2024/11/10 19:01:14 by joamiran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,41 +24,26 @@ void locking_targets_a(t_stack **a, t_stack **b)
     max = NULL;
     while (current_a)
     {
-    //    printf("Processing Current A: %d\n", current_a->value);
         best_match = INT_MIN;
         current_b = (*b)->head;
         target = NULL;
 
         while (current_b)
         {
-      //      printf("Comparing with Current B: %d\n", current_b->value);
-
             if (current_b->value < current_a->value && current_b->value > best_match)
             {
                 best_match = current_b->value;
                 target = current_b;
-        //        printf("Best match: %d\n", target->value);
             }
             current_b = current_b->next;
         }
         if (best_match == INT_MIN)
         {
             max = find_max_node(*b);
-          //  if (max)
-          //      printf("Max value: %d\n", max->value);
-       //     else
-           //     printf("Max is NULL\n");
             current_a->target = max;
         }
         else
-        {
             current_a->target = target;
-        //    if (target)
-          //      printf("Target value: %d\n", target->value);
-          //  else
-            //    printf("Target is NULL\n");
-        }
-
         current_a = current_a->next;
     }
 }
@@ -110,11 +95,9 @@ void set_cheapest(t_stack **a)
     
     if (!(*a)->head)
         return ;
-
     current_a = (*a)->head;
     lowest_cost = INT_MAX;
     cheapest = NULL;
-
     while (current_a)
     {
         if (current_a->push_cost < lowest_cost)
