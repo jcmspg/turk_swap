@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   movements.c                                        :+:      :+:    :+:   */
+/*   movements3.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joamiran <joamiran@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joamiran <joamiran@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/04 20:26:08 by joamiran          #+#    #+#             */
-/*   Updated: 2024/11/11 18:34:10 by joamiran         ###   ########.fr       */
+/*   Created: 2024/11/11 18:33:49 by joamiran          #+#    #+#             */
+/*   Updated: 2024/11/11 18:34:09 by joamiran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	rotate_a(t_stack **a)
+void	swap_a(t_stack **a)
 {
-	rotate(a);
-	write(1, "ra\n", 3);
+	swap(a);
+	write(1, "sa\n", 3);
 }
 
-void	rotate_b(t_stack **b)
+void	swap_b(t_stack **b)
 {
-	rotate(b);
-	write(1, "rb\n", 3);
+	swap(b);
+	write(1, "sb\n", 3);
 }
 
-void	rotate_ab(t_stack **a, t_stack **b)
+void	swap_s(t_stack **a, t_stack **b)
 {
-	rotate(a);
-	rotate(b);
-	write(1, "rr\n", 3);
+	swap(a);
+	swap(b);
+	write(1, "ss\n", 3);
 }

@@ -6,7 +6,7 @@
 /*   By: joamiran <joamiran@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 17:25:36 by joamiran          #+#    #+#             */
-/*   Updated: 2024/11/08 20:50:21 by joamiran         ###   ########.fr       */
+/*   Updated: 2024/11/11 18:40:06 by joamiran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 // function to parse the arguments and store them in the stack
 
-static int	arg_checker(int argc, char **argv)
+int	arg_checker(int argc, char **argv)
 {
 	if (argc < 2)
 		return (1);
@@ -23,7 +23,7 @@ static int	arg_checker(int argc, char **argv)
 	return (0);
 }
 
-static int	dup_checker(int argc, char **argv)
+int	dup_checker(int argc, char **argv)
 {
 	int			i;
 	t_hashset	*hashset;
@@ -45,7 +45,7 @@ static int	dup_checker(int argc, char **argv)
 	return (0);
 }
 
-static int	parser_checker(int argc, char **argv)
+int	parser_checker(int argc, char **argv)
 {
 	if (arg_checker(argc, argv))
 	{
@@ -60,7 +60,7 @@ static int	parser_checker(int argc, char **argv)
 	return (0);
 }
 
-static void	free_split(char **values)
+void	free_split(char **values)
 {
 	int	i;
 
@@ -73,60 +73,4 @@ static void	free_split(char **values)
 		i++;
 	}
 	free(values);
-}
-
-int	parse_string(t_stack *stack_a, char *str)
-{
-	char	**values;
-	int		i;
-	int		argc;
-
-	values = ft_split(str, ' ');
-	if (!values)
-		return (1);
-	i = 0;
-	argc = 0;
-	while (values[argc])
-		argc++;
-	if (parser_checker(argc, values))
-	{
-		free_split(values);
-		return (1);
-	}
-	while (i < argc)
-	{
-		node_to_stack(stack_a, ft_atoi(values[i]));
-		i++;
-	}
-	return (0);
-}
-
-int	parse_args(t_stack *stack_a, int argc, char **argv)
-{
-	int	i;
-
-	i = 1;
-	if (parser_checker(argc, argv))
-		return (1);
-	while (i < argc)
-	{
-		if (!is_number(argv[i]) || !is_integer(argv[i]))
-		{
-			ft_putstr_fd("Error.\n", 2);
-			return (1);
-		}
-		node_to_stack(stack_a, ft_atoi(argv[i]));
-		i++;
-	}
-	return (0);
-}
-
-int	ft_parser(t_stack *stack_a, int argc, char **argv)
-{
-	if (argc < 2)
-		return (1);
-	if (argc == 2)
-		return (parse_string(stack_a, argv[1]));
-	else
-		return (parse_args(stack_a, argc, argv));
 }
