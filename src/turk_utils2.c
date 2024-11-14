@@ -6,7 +6,7 @@
 /*   By: joamiran <joamiran@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 20:05:57 by joamiran          #+#    #+#             */
-/*   Updated: 2024/11/11 20:15:30 by joamiran         ###   ########.fr       */
+/*   Updated: 2024/11/14 20:08:21 by joamiran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,3 +83,19 @@ void	locking_targets_b(t_stack **a, t_stack **b)
 		current_b = current_b->next;
 	}
 }
+
+/*
+void	print_stack_values(t_stack *stack)
+{
+	t_node	*current;
+
+	current = stack->head;
+	printf("Stack values: ");
+	while (current != NULL)
+	{
+		printf("%d ", current->value);
+		current = current->next;
+	}
+	printf("\n");
+}
+*/

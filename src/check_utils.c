@@ -6,7 +6,7 @@
 /*   By: joamiran <joamiran@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 17:16:07 by joamiran          #+#    #+#             */
-/*   Updated: 2024/11/11 18:01:19 by joamiran         ###   ########.fr       */
+/*   Updated: 2024/11/14 20:11:16 by joamiran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,8 @@ int	check_values(char **values)
 	i = 0;
 	while (values[i])
 	{
-		if (!is_number(values[i]) || !is_integer(values[i]))
-		{
-			ft_putstr_fd("Error, values are not valid.\n", 2);
+		if (!is_number(values[i]) || !is_integer(values[i]) || !values[i][0])
 			return (0);
-		}
 		i++;
 	}
 	return (1);

@@ -6,13 +6,13 @@
 /*   By: joamiran <joamiran@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 21:14:13 by joamiran          #+#    #+#             */
-/*   Updated: 2024/10/14 21:15:04 by joamiran         ###   ########.fr       */
+/*   Updated: 2024/11/12 21:31:16 by joamiran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-long ft_atol(const char *str)
+long	ft_atol(const char *str)
 {
 	size_t	i;
 	size_t	signal;

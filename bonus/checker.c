@@ -6,7 +6,7 @@
 /*   By: joamiran <joamiran@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 21:19:47 by joamiran          #+#    #+#             */
-/*   Updated: 2024/11/12 21:22:59 by joamiran         ###   ########.fr       */
+/*   Updated: 2024/11/14 19:36:40 by joamiran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,7 @@ int	main(int argc, char **argv)
 	a = new_stack();
 	b = new_stack();
 	if (ft_parser(a, argc, argv))
-	{
-		show_error(&a, &b);
 		return (1);
-	}
 	line = get_next_line(0);
 	while (line && *line != 4)
 	{
@@ -74,7 +71,7 @@ int	main(int argc, char **argv)
 		line = get_next_line(0);
 	}
 	free(line);
-	if (is_sorted(a))
+	if (is_sorted(a) && !b->size)
 		ft_putstr_fd("OK\n", 1);
 	else
 		ft_putstr_fd("KO\n", 1);

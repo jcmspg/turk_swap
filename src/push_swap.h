@@ -6,7 +6,7 @@
 /*   By: joamiran <joamiran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 18:01:47 by joamiran          #+#    #+#             */
-/*   Updated: 2024/11/11 20:09:33 by joamiran         ###   ########.fr       */
+/*   Updated: 2024/11/12 21:34:02 by joamiran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ typedef struct n_node
 // hashset will have an array of these nodes
 typedef struct s_hashset
 {
-	t_hashnode **array; // array of linked lists
+	t_hashnode		**array;
 }					t_hashset;
 
 // math functions

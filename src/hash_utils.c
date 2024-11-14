@@ -6,7 +6,7 @@
 /*   By: joamiran <joamiran@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 19:03:34 by joamiran          #+#    #+#             */
-/*   Updated: 2024/11/11 18:19:17 by joamiran         ###   ########.fr       */
+/*   Updated: 2024/11/14 17:54:16 by joamiran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ unsigned int	ft_hash(char *str)
 	int				c;
 
 	hash = 5381;
+	if (ft_strcmp(str, "-0") == 0)
+		str = "0";
 	c = *str;
 	while (c)
 	{
@@ -77,6 +79,8 @@ int	ft_duplicate(t_hashset *hashset, char *key)
 	unsigned int	index;
 	t_hashnode		*tmp;
 
+	if (ft_strcmp(key, "-0") == 0)
+		key = "0";
 	index = ft_hash(key);
 	tmp = hashset->array[index];
 	while (tmp)

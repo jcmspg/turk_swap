@@ -6,14 +6,13 @@
 /*   By: joamiran <joamiran@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 17:25:36 by joamiran          #+#    #+#             */
-/*   Updated: 2024/11/11 18:40:06 by joamiran         ###   ########.fr       */
+/*   Updated: 2024/11/14 18:49:05 by joamiran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 // function to parse the arguments and store them in the stack
-
 int	arg_checker(int argc, char **argv)
 {
 	if (argc < 2)
@@ -34,6 +33,8 @@ int	dup_checker(int argc, char **argv)
 		return (1);
 	while (i < argc)
 	{
+		if (ft_strcmp(argv[i], "-0") == 0)
+			argv[i] = "0";
 		if (!ft_insert_hash(hashset, argv[i]))
 		{
 			ft_free_hash(hashset);
