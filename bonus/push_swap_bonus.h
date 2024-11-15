@@ -6,7 +6,7 @@
 /*   By: joamiran <joamiran@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 18:37:31 by joamiran          #+#    #+#             */
-/*   Updated: 2024/11/12 21:19:29 by joamiran         ###   ########.fr       */
+/*   Updated: 2024/11/15 16:55:33 by joamiran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 # include "../src/push_swap.h"
 
-void	parse_command(char *line, t_stack **a, t_stack **b);
+int	parse_command(char *line, t_stack **a, t_stack **b);
 
 // instructions
 void	sa(t_stack **a);

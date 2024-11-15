@@ -6,7 +6,7 @@
 /*   By: joamiran <joamiran@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 21:19:47 by joamiran          #+#    #+#             */
-/*   Updated: 2024/11/14 19:36:40 by joamiran         ###   ########.fr       */
+/*   Updated: 2024/11/15 16:55:25 by joamiran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	show_error(t_stack **a, t_stack **b)
 	ft_putstr_fd("Error\n", 2);
 }
 
-void	parse_command(char *line, t_stack **a, t_stack **b)
+int	parse_command(char *line, t_stack **a, t_stack **b)
 {
 	if (ft_strcmp(line, "sa\n") == 0)
 		sa(a);
@@ -50,7 +50,11 @@ void	parse_command(char *line, t_stack **a, t_stack **b)
 	else if (ft_strcmp(line, "rrr\n") == 0)
 		rrr(a, b);
 	else
+    {
 		show_error(a, b);
+        return (0);
+    }
+    return (1);
 }
 
 int	main(int argc, char **argv)
@@ -66,7 +70,11 @@ int	main(int argc, char **argv)
 	line = get_next_line(0);
 	while (line && *line != 4)
 	{
-		parse_command(line, &a, &b);
+		if (!parse_command(line, &a, &b))
+        {
+            free(line);
+            return (1);
+        }
 		free(line);
 		line = get_next_line(0);
 	}
