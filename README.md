@@ -29,6 +29,8 @@ This project is part of the 42 curriculum. It involves sorting a stack of intege
 - Handles edge cases such as empty stacks and stacks with duplicate values
 - Efficiently sorts stacks with a large number of elements
 - Debugging output to trace the state of the stacks
+- Modular design with helper functions for each step of the algorithm
+- checker program to validate the sorting operations (Bonus part)
 
 ## Installation
 
@@ -48,6 +50,13 @@ To install and run the project, follow these steps:
     ```sh
     make
     ```
+4. Compile the checker program:
+    ```sh
+    make bonus
+    ```
+
+
+
 
 ## Usage
 
@@ -57,15 +66,38 @@ To run the sorting algorithm, use the following command:
 ./push_swap $(shuf -i 1-50 -n 50 | tr '\n' ' ')
 ```
 
-To filter the output for specific debugging information, use `grep`:
 
 ```sh
-./push_swap $(shuf -i 1-50 -n 50 | tr '\n' ' ') | grep -e 'print_stack_values' -e 'is it sorted'
+./push_swap $(shuf -i 1-50 -n 50 | tr '\n' ' ') | wc -l -> to count the number of operations
 ```
+
+To validate the sorting operations, use the checker program:
+
+```sh
+ARG="4 67 3 87 23"; ./push_swap $ARG | ./checker $ARG
+```
+
 
 ## Algorithm Description
 
-The Push Swap algorithm works by using two stacks, `A` and `B`, and a set of operations to sort the elements in stack `A`. The main steps of the algorithm are as follows:
+The Push Swap algorithm works by using two stacks, `A` and `B`, and a set of operations to sort the elements in stack `A`.
+It works by identifying the target positions for each element in stack `A` and moving elements to stack `B` to sort them. Once the elements are sorted in stack `B`, they are moved back to stack `A` in the correct order.
+
+We are implementing a sorting algorithm that uses two stacks, `A` and `B`, to sort a list of integers. The algorithm aims to sort the elements in stack `A` using a limited set of operations, such as `sa`, `sb`, `ss`, `pa`, `pb`, `ra`, `rb`, `rr`, `rra`, `rrb`, and `rrr`.
+
+The algorithm used is called Turk Algorithm by A. Yigit Ogun , which is a variation of the Quick Sort algorithm. It works by identifying the target positions for each element in stack `A` and moving elements to stack `B` to sort them. Once the elements are sorted in stack `B`, they are moved back to stack `A` in the correct order. You can find more about the algorithm [here](https://medium.com/@ayogun/push-swap-c1f5d2d41e97).
+
+The targeting works as follows:
+
+- For each element in stack `A`, the algorithm identifies the target position for that element in stack `B`.
+- Every node in stack `A` has a target node in stack `B`, and vice versa.
+- The algorithm calculates the target positions based on the closest smaller number. If there is none, it assigns as target the largest number in the other stack.
+- It then finds the "cheapest" element to move from stack `A` to stack `B` based on the cost of moving each element to its correct position.
+- The "cheapest" element is moved to stack `B`, and the process is repeated until all elements except 3 are moved to stack `B`.
+- The remaining elements in stack `A` are sorted directly using a simple sorting method.
+- The elements in stack `B` are moved back to stack `A` in the correct order, and final adjustments are made to ensure the smallest element is at the top of stack `A`.
+
+The main steps of the algorithm are as follows:
 
 1. **Initial Checks**: 
     - The algorithm starts by checking if stack `A` is already sorted. If it is, no further operations are needed.
@@ -95,6 +127,7 @@ The Push Swap algorithm works by using two stacks, `A` and `B`, and a set of ope
 
 - **is_sorted**: Checks if stack `A` is already sorted.
 - **ft_parser**: Parses the input and initializes stack `A`.
+- **assign_index**: Assigns indices to nodes in stack `A` and marks nodes above the median.
 
 #### Pushing to Stack B
 
@@ -124,27 +157,76 @@ The Push Swap algorithm works by using two stacks, `A` and `B`, and a set of ope
   - **rotate_a**: Rotates stack `A`.
   - **reverse_rotate_a**: Reverse rotates stack `A`.
 
+### Checker Program
 
+The checker program is used to validate the sorting operations performed by the Push Swap algorithm. It reads the input and the list of operations, applies the operations to the input, and checks if the input is sorted after the operations are applied.
+
+The checker program performs the following steps:
+
+1. **Parsing Input**: Parses the input and initializes stack `A`.
+2. **Applying Operations**: Reads the list of operations and applies them to the input.
+3. **Checking Sorting**: Checks if the input is sorted after applying the operations.
+4. **Output**: Prints `OK` if the input is sorted, `KO` otherwise.
+
+The checker program is useful for testing the correctness of the sorting algorithm and ensuring that the operations are applied correctly.
+
+## Conclusion
 By following these steps, the Push Swap algorithm efficiently sorts the elements in stack `A` using a limited set of operations. The use of helper functions ensures that each part of the algorithm is modular and easy to understand.
+You can find the full implementation of the Push Swap algorithm in the `push_swap.c` file, along with the helper functions used in the sorting process.
+You can also find the checker program in the `checker.c` file, which validates the sorting operations performed by the algorithm.
 
 ## Functions
 
-### Main Functions
+### Push Swap Overview
+The Push Swap algorithm is implemented using a set of functions that handle different parts of the sorting process. These functions are organized into main functions and helper functions to make the algorithm modular and easy to understand.
+
+#### Main Stack Operations
+
+- `sa`: Swaps the top two elements of stack A.
+- `sb`: Swaps the top two elements of stack B.
+- `ss`: Swaps the top two elements of both stacks.
+- `pa`: Moves the top element of stack B to stack A.
+- `pb`: Moves the top element of stack A to stack B.
+- `ra`: Rotates stack A (shifts up all elements by one).
+- `rb`: Rotates stack B (shifts up all elements by one).
+- `rr`: Rotates both stacks.
+- `rra`: Reverse rotates stack A (shifts down all elements by one).
+- `rrb`: Reverse rotates stack B (shifts down all elements by one).
+- `rrr`: Reverse rotates both stacks.
+
+#### Main Functions
 
 - `ft_turk`: Main sorting function that orchestrates the sorting process.
 - `send_to_b`: Moves the "cheapest" node from stack A to stack B.
 - `send_to_a`: Moves the top node from stack B to stack A.
 - `move_min_to_top`: Moves the smallest node to the top of stack A.
 
-### Helper Functions
+#### Helper Functions
 
+- `ft_parser`: Parses the input and initializes stack A.
+- `is_sorted`: Checks if stack A is already sorted.
 - `find_cheapest`: Finds the node with the minimum push cost in a stack.
 - `find_min_node`: Finds the node with the minimum value in a stack.
 - `assign_index`: Assigns indices to nodes in a stack and marks nodes above the median.
 - `locking_targets_a`: Locks target nodes in stack B for each node in stack A.
 - `locking_targets_b`: Locks target nodes in stack A for each node in stack B.
+- `get_a_ready`: Prepares stack A for the move.
+- `get_b_ready`: Prepares stack B for the move.
 
-## Contributing
+### Checker Program Overview
+The checker program is implemented using a set of functions that read the input, apply the operations, and check if the input is sorted after the operations are applied. These functions are organized into main functions and helper functions to make the program modular and easy to understand.
+
+#### Main Functions
+
+- `main`: Main function that reads the input, applies the operations, and checks the sorting.
+- `get_next_line`: Reads the next line from the input.
+- `parse_commands`: Parses the list of operations.
+
+### Conclusion
+By using these functions, the Push Swap algorithm and the checker program are implemented in a modular and organized way. The main functions handle the main operations, while the helper functions provide support for specific tasks within the algorithm. This design makes the code easier to read, understand, and maintain.
+
+
+### Contributing
 
 Contributions are welcome! Please follow these steps to contribute:
 
